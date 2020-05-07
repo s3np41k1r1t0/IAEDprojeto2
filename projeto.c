@@ -17,40 +17,49 @@ int main(){
     /*Variavel que contem o comando a ser executado*/
     char op;
 
+    /*Variavel que contem o numero da linha do comando*/
+    unsigned int NL = 1;
+
+    inicia();
+
     /*Le carateres da stdin ate encontrar o caso terminal
       ou um comando a executar*/
     while((op = getchar()) != 'x'){
         switch(op){
             case('a'):
-                novo_jogo();
+                novo_jogo(NL);
                 break;
 
             case('A'):
-                nova_equipa();
+                nova_equipa(NL);
                 break;
 
             case('l'):
-                lista_jogos();
+                lista_jogos(NL);
                 break;
 
             case('p'):
-                procura_jogo();
+                procura_jogo(NL);
                 break;
 
             case('P'):
-                procura_equipa();
+                procura_equipa(NL);
                 break;
 
             case('r'):
-                apaga_jogo();
+                apaga_jogo(NL);
                 break;
 
             case('s'):
-                altera_pontuacao();
+                altera_pontuacao(NL);
                 break;
 
             case('g'):
-                encontra_vencedores();
+                encontra_vencedores(NL);
+                break;
+        
+            case('\n'):
+                NL++;
                 break;
         }
     }
