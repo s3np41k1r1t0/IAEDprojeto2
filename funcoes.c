@@ -21,7 +21,7 @@ void inicializa(){
     inicializa_equipas();
 }
 
-void A(unsigned int NL){
+void a(unsigned int NL){
     char nome[MAX_STR];
     int size;
     equipa* nova;

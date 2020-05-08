@@ -6,25 +6,18 @@
 #include "equipa.h"
 #include "auxiliares.h"
 
-typedef struct Jogo {
+#define NULLjogo NULL
+#define nome_jogo(a) (a->nome)
+
+typedef struct jogo {
     char* nome;
-    equipa* equipa1;
-    equipa* equipa2;
+    Equipa equipa1;
+    Equipa equipa2;
     int score1;
     int score2;
-} jogo;
+} *Jogo;
 
-typedef struct No_Jogo{
-    jogo* jg;
-    struct Node* proximo;
-    struct Node* anterior;
-} *no_jogo;
-
-typedef struct Lista_Jogos{
-    no_jogo primeiro;
-    no_jogo ultimo;
-}
-
-jogo* cria_jogo(char* nome, int size_nome, equipa* equipa1, equipa* equipa2, int score1, int score2);
+Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int score1, int score2);
+void free_jogo(Jogo jg);
 
 #endif

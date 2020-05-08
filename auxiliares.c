@@ -25,3 +25,7 @@ int get_string(char* arg){
     return i;
 }
 
+int hash(char* s, int m){
+    return ((int)*s + (int)*(s+strlen(s)-1)) % m;
+}
+

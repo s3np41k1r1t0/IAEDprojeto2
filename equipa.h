@@ -5,37 +5,16 @@
 #include <string.h>
 #include "auxiliares.h"
 
-#define M_equipas 31
+#define nome_equipa(a) (a->nome)
 
-typedef struct Equipa{
+typedef struct equipa{
     char* nome;
     int ganhos;
-} equipa;
+} *Equipa;
 
-typedef struct No_Equipa{
-    equipa *eq;
-    struct No_Equipa *next;
-} *no_equipa;
-
-typedef struct Melhor_Equipa{
-    int max;
-    no_equipa no;
-} melhor_equipa;
-
-int hash(char* s, int m);
-void free_lista(no_equipa head);
-
-equipa* cria_equipa(char* nome, int size_nome);
-char* obtem_nome(equipa* eq);
-void adiciona_vitoria(equipa* eq);
-void remove_vitoria(equipa* eq);
-
-no_equipa push(no_equipa head, equipa* eq);
-
-void inicializa_equipas();
-void destroi_equipas();
-void insere_equipa(equipa* eq);
-equipa* procura_equipa(char* nome);
-equipa* procura_lista(no_equipa no, char* nome);
+Equipa cria_equipa(char* nome, int size_nome);
+void adiciona_vitoria(Equipa eq);
+void remove_vitoria(Equipa eq);
+void free_equipa(Equipa eq);
 
 #endif

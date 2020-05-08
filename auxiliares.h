@@ -7,5 +7,6 @@
 #define STR_MAX 1024
 
 int get_string(char* arg);
+int hash(char* s, int m);
 
 #endif
