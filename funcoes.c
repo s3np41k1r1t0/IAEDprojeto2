@@ -1,6 +1,4 @@
 #include "funcoes.h"
-#include "jogo.h"
-#include "auxiliares.h"
 
 /*
 void novo_jogo(unsigned int NL){
@@ -21,4 +19,36 @@ void novo_jogo(unsigned int NL){
 void inicializa(){
     inicializa_jogos();
     inicializa_equipas();
+}
+
+void A(unsigned int NL){
+    char nome[MAX_STR];
+    int size;
+    equipa* nova;
+
+    size = get_string(nome);
+
+    if(procura_equipa(nome) != NULL){
+        printf("%ud Equipa inexistente.\n",NL);
+        return;
+    }
+
+   nova = cria_equipa(nome,size); 
+   insere_equipa(nova);        
+} 
+
+void P(unsigned int NL){
+    equipa* atual;
+    char nome[MAX_STR];
+
+    get_string(nome);
+    atual = procura_equipa(nome);
+
+    if(atual == NULL){
+        printf("%ud Equipa inexistente.\n",NL);
+        return;
+    }
+
+    else
+        printf("%s %d",atual->nome,atual->ganhos);
 }

@@ -10,13 +10,13 @@ int get_string(char* arg){
     int i = 0;
 
     c = getchar();
-    while(c != ':' && c != '\n' && c != EOF && i < STR_MAX - 1){
+    while(c != ':' && c != '\n' && i < STR_MAX - 1){
         arg[i++] = c;
         c = getchar();
     }
 
-    /*Limpa a stdin ate encomtrar ':', '\n' ou EOF*/
-    while(c != ':' && c != '\n' && c != EOF)
+    /*Limpa a stdin ate encontrar ':', '\n' ou EOF*/
+    while(c != ':' && c != '\n')
         c = getchar();
 
     /*Termina a string com null byte*/
@@ -24,3 +24,4 @@ int get_string(char* arg){
 
     return i;
 }
+

@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_STR 1024
+#define STR_MAX 1024
+
+int get_string(char* arg);
 
 #endif

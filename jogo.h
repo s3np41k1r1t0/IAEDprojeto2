@@ -3,26 +3,28 @@
 
 #include <stdlib.h>
 #include <strings.h>
+#include "equipa.h"
+#include "auxiliares.h"
 
-/*
 typedef struct Jogo {
     char* nome;
-    char* equipa1;
-    char* equipa2;
+    equipa* equipa1;
+    equipa* equipa2;
     int score1;
     int score2;
 } jogo;
 
-typedef struct Node {
-    jogo* dados_jogo;
+typedef struct No_Jogo{
+    jogo* jg;
     struct Node* proximo;
-} node;
+    struct Node* anterior;
+} *no_jogo;
 
-static node* heads;
-static int size_table;
+typedef struct Lista_Jogos{
+    no_jogo primeiro;
+    no_jogo ultimo;
+}
 
-jogo* cria_jogo(char* nome, int size_nome, char* equipa1, int size1, char* equipa2, int size2, int score1, int score2);
-*/
-
+jogo* cria_jogo(char* nome, int size_nome, equipa* equipa1, equipa* equipa2, int score1, int score2);
 
 #endif

@@ -20,42 +20,42 @@ int main(){
     /*Variavel que contem o numero da linha do comando*/
     unsigned int NL = 1;
 
-    inicia();
+    inicializa();
 
     /*Le carateres da stdin ate encontrar o caso terminal
       ou um comando a executar*/
     while((op = getchar()) != 'x'){
         switch(op){
             case('a'):
-                novo_jogo(NL);
+                a(NL);
                 break;
 
             case('A'):
-                nova_equipa(NL);
+                A(NL);
                 break;
 
             case('l'):
-                lista_jogos(NL);
+                l(NL);
                 break;
 
             case('p'):
-                procura_jogo(NL);
+                p(NL);
                 break;
 
             case('P'):
-                procura_equipa(NL);
+                P(NL);
                 break;
 
             case('r'):
-                apaga_jogo(NL);
+                r(NL);
                 break;
 
             case('s'):
-                altera_pontuacao(NL);
+                s(NL);
                 break;
 
             case('g'):
-                encontra_vencedores(NL);
+                g(NL);
                 break;
         
             case('\n'):
