@@ -1,7 +1,7 @@
 #include "estruturas_jogo.h"
 
-static No_Jogo *jogos;
-static lista_jg lista_jogos;
+No_Jogo *jogos;
+lista_jg lista_jogos;
 
 No_Jogo push_jogo(No_Jogo atual, Jogo jg){
     No_Jogo novo;
@@ -9,16 +9,12 @@ No_Jogo push_jogo(No_Jogo atual, Jogo jg){
     novo = malloc(sizeof(struct no_jogo));
     novo->jg = jg;
 
-    if(atual != NULL){
-        novo->anterior = NULL;
+    if(atual != NULL)
         novo->proximo = atual;
-        atual->anterior = novo;
-    }
+    
 
-    else{
+    else
         novo->proximo = NULL;
-        novo->anterior = NULL;
-    }
 
     if(lista_jogos->primeiro == NULL){
         lista_jogos->primeiro = novo;
@@ -95,16 +91,8 @@ void print_todos_jogos(unsigned int NL){
 /* HASH TABLE */
 
 void inicializa_jogos(){
-    int i;
-
-    jogos = malloc(M_jogos*sizeof(No_Jogo));
-
-    for(i=0;i<M_jogos;i++)
-        jogos[i] = NULL;
-
-    lista_jogos = malloc(sizeof(struct Lista_Jogos));
-    lista_jogos->primeiro = NULL;
-    lista_jogos->ultimo = NULL;
+    jogos = calloc(M_jogos,sizeof(No_Jogo));
+    lista_jogos = calloc(1,sizeof(struct Lista_Jogos));
 }
 
 void destroi_jogos(){
@@ -154,18 +142,14 @@ Jogo remove_no_jogo(No_Jogo rem){
     if(rem->inserido_ant != NULL)
         rem->inserido_ant->inserido_prox = rem->inserido_prox;
 
-    if(rem->proximo != NULL){
-        rem->proximo->anterior = rem->anterior;
+    if(rem->proximo != NULL)
         jogos[ind] = rem->proximo;
-    }
-
-    if(rem->anterior != NULL)
-        rem->anterior->proximo = rem->proximo;
-
+    
     ret = rem->jg;
 
     free(rem);
     
     return ret;
 }
+
 

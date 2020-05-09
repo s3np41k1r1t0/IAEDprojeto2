@@ -114,3 +114,20 @@ void r(){
     NL++;
 }
 
+void s(){
+    char nome[MAX_STR];
+    int score1,score2;
+    Jogo jg;
+
+    get_string(nome);
+    scanf("%d:%d",&score1,&score2);
+
+    if((jg = procura_jogo(nome)) == NULL){
+        printf("%u Jogo inexistente.\n",NL++);
+        return;
+    }
+
+    altera_score(jg,score1,score2);
+
+    NL++;
+}

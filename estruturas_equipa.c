@@ -1,6 +1,6 @@
 #include "estruturas_equipa.h"
 
-static no_equipa *equipas;
+no_equipa *equipas;
 
 /* HANDLERS ELEMENTO DA HASH TABLE */
 no_equipa push_equipa(no_equipa head, Equipa eq){
@@ -38,12 +38,7 @@ void free_lista(no_equipa head){
 
 /* HASH TABLE */
 void inicializa_equipas(){
-    int i;
-
-    equipas = malloc(M_equipas*sizeof(no_equipa));
-
-    for(i=0;i<M_equipas;i++)
-        equipas[i] = NULL;         
+    equipas = calloc(M_equipas,sizeof(no_equipa));
 }
 
 void destroi_equipas(){

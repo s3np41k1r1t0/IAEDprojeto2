@@ -11,7 +11,6 @@ typedef struct no_jogo{
     Jogo jg;
     
     struct no_jogo* proximo;
-    struct no_jogo* anterior;
     
     struct no_jogo* inserido_prox;
     struct no_jogo* inserido_ant;

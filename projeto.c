@@ -17,9 +17,6 @@ int main(){
     /*Variavel que contem o comando a ser executado*/
     char op;
 
-    /*Variavel que contem o numero da linha do comando*/
-    unsigned int NL = 1;
-
     inicializa();
 
     /*Le carateres da stdin ate encontrar o caso terminal
@@ -28,42 +25,42 @@ int main(){
         switch(op){
             case('a'):
                 getchar();
-                a(NL);
+                a();
                 break;
 
             case('A'):
                 getchar();
-                A(NL);
+                A();
                 break;
             
             case('l'):
                 getchar();
-                l(NL);
+                l();
                 break;
             
             case('p'):
                 getchar();
-                p(NL);
+                p();
                 break;
             
             case('P'):
                 getchar();
-                P(NL);
+                P();
                 break;
             
             case('r'):
                 getchar();
-                r(NL);
+                r();
                 break;
-            /*
+            
             case('s'):
                 getchar();
-                s(NL);
+                s();
                 break;
-
+            /*
             case('g'):
                 getchar();
-                g(NL);
+                g();
                 break;
             */
         }

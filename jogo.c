@@ -37,3 +37,37 @@ void remove_jogo(Jogo jg){
 
     free_jogo(jg);
 }
+
+void altera_score(Jogo jg, int score1, int score2){
+    if(jg->score1 == jg->score2){
+        if(score1 > score2)
+            adiciona_vitoria(jg->equipa1);
+
+        if(score2 > score1)
+            adiciona_vitoria(jg->equipa2);
+    }
+
+    else if(jg->score1 > jg->score2){
+        if(score1 == score2)
+            remove_vitoria(jg->equipa1);
+
+        else if(score2 > score1){
+            remove_vitoria(jg->equipa1);
+            adiciona_vitoria(jg->equipa2);
+        }
+    }
+
+    else{
+        if(score1 == score2)
+            remove_vitoria(jg->equipa2);
+
+        else if(score1 > score2){
+            remove_vitoria(jg->equipa2);
+            adiciona_vitoria(jg->equipa1);
+        }
+    }
+
+    jg->score1 = score1;
+    jg->score2 = score2;
+}
+
