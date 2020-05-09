@@ -12,8 +12,6 @@ typedef struct No_Equipa{
     struct No_Equipa *next;
 } *no_equipa;
 
-int hash(char* s, int m);
-
 no_equipa push_equipa(no_equipa head, Equipa eq);
 void free_lista(no_equipa head);
 Equipa procura_equipa(char* nome);

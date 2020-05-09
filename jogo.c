@@ -22,7 +22,9 @@ Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int sc
 }
 
 void free_jogo(Jogo jg){
-    free(nome_jogo(jg));
-    free(jg);
+    if(jg != NULL){
+        free(nome_jogo(jg));
+        free(jg);
+    }
 }
 

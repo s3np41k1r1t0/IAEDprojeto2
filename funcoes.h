@@ -4,16 +4,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "equipa.h"
+#include "estruturas_equipa.h"
+#include "jogo.h"
+#include "estruturas_jogo.h"
 #include "auxiliares.h"
 
 void inicializa();
-void a(unsigned int NL);
-void A(unsigned int NL);
-void l(unsigned int NL);
-void p(unsigned int NL);
-void P(unsigned int NL);
-void r(unsigned int NL);
-void s(unsigned int NL);
-void g(unsigned int NL);
+void destroi();
+void a();
+void A();
+void l();
+void p();
+void P();
+void r();
+void s();
+void g();
 
 #endif

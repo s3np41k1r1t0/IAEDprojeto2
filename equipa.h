@@ -6,6 +6,7 @@
 #include "auxiliares.h"
 
 #define nome_equipa(a) (a->nome)
+#define jogos_ganhos(a) (a->ganhos)
 
 typedef struct equipa{
     char* nome;

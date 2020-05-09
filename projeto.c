@@ -27,42 +27,49 @@ int main(){
     while((op = getchar()) != 'x'){
         switch(op){
             case('a'):
+                getchar();
                 a(NL);
                 break;
 
             case('A'):
+                getchar();
                 A(NL);
                 break;
-
+            
             case('l'):
+                getchar();
                 l(NL);
                 break;
-
+            
             case('p'):
+                getchar();
                 p(NL);
                 break;
-
+            
             case('P'):
+                getchar();
                 P(NL);
                 break;
-
+            /*
             case('r'):
+                getchar();
                 r(NL);
                 break;
 
             case('s'):
+                getchar();
                 s(NL);
                 break;
 
             case('g'):
+                getchar();
                 g(NL);
                 break;
-        
-            case('\n'):
-                NL++;
-                break;
+            */
         }
     }
-    
+
+    destroi();
+
     return 0;
 }

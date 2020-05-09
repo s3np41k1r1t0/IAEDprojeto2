@@ -7,10 +7,32 @@ No_Jogo push_jogo(No_Jogo atual, Jogo jg){
     No_Jogo novo;
 
     novo = malloc(sizeof(struct no_jogo));
-
     novo->jg = jg;
-    novo->anterior = NULL;
-    novo->proximo = atual;
+
+    if(atual != NULL){
+        novo->anterior = NULL;
+        novo->proximo = atual;
+        atual->anterior = novo;
+    }
+
+    else{
+        novo->proximo = NULL;
+        novo->anterior = NULL;
+    }
+
+    if(lista_jogos->primeiro == NULL){
+        lista_jogos->primeiro = novo;
+        lista_jogos->ultimo = novo;
+        novo->inserido_prox = NULL;
+        novo->inserido_ant = NULL;
+    }
+
+    else{
+        novo->inserido_ant = lista_jogos->ultimo;
+        lista_jogos->ultimo->inserido_prox = novo;        
+        novo->inserido_prox = NULL;
+        lista_jogos->ultimo = novo;
+    }
 
     return novo;
 }
@@ -37,6 +59,22 @@ void free_lista_jogos(No_Jogo head){
     }
 }
 
+void print_todos_jogos(unsigned int NL){
+    No_Jogo temp;
+
+    if(lista_jogos->primeiro == NULL)
+        return;
+   
+    temp = lista_jogos->primeiro;
+    
+    while(temp != NULL){
+        /*melhorar abstracao*/
+        printf("%u %s %s %s %d %d\n",NL,nome_jogo(temp->jg),nome_equipa(temp->jg->equipa1),nome_equipa(temp->jg->equipa2),temp->jg->score1,temp->jg->score2);
+        
+        temp = temp->inserido_prox;
+    }
+}
+
 /* HASH TABLE */
 
 void inicializa_jogos(){
@@ -45,7 +83,11 @@ void inicializa_jogos(){
     jogos = malloc(M_jogos*sizeof(No_Jogo));
 
     for(i=0;i<M_jogos;i++)
-        jogos[i] = NULL; 
+        jogos[i] = NULL;
+
+    lista_jogos = malloc(sizeof(struct Lista_Jogos));
+    lista_jogos->primeiro = NULL;
+    lista_jogos->ultimo = NULL;
 }
 
 void destroi_jogos(){
@@ -55,6 +97,7 @@ void destroi_jogos(){
         free_lista_jogos(jogos[i]);
 
     free(jogos);
+    free(lista_jogos);
 }
 
 void insere_jogo(Jogo jg){

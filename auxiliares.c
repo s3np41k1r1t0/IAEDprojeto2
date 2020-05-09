@@ -10,7 +10,7 @@ int get_string(char* arg){
     int i = 0;
 
     c = getchar();
-    while(c != ':' && c != '\n' && i < STR_MAX - 1){
+    while(c != ':' && c != '\n' && i < MAX_STR - 1){
         arg[i++] = c;
         c = getchar();
     }

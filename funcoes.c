@@ -1,54 +1,98 @@
 #include "funcoes.h"
 
-/*
-void novo_jogo(unsigned int NL){
-    jogo* novo = NULL;
-    char nome[MAX_STR], equipa1[MAX_STR], equipa2[MAX_STR];
-    int size_nome, size1, size2;
-
-    size_nome = get_string(nome);
-    size1 = get_string(equipa1);
-    size2 = get_string(equipa2);
-
-    novo = cria_jogo(nome, size_nome, equipa1, size1, equipa2, size2);
-
-    insere(novo);
-}
-*/
+unsigned int NL;
 
 void inicializa(){
     inicializa_jogos();
     inicializa_equipas();
+    NL=1;
 }
 
-void a(unsigned int NL){
+void destroi(){
+    destroi_jogos();
+    destroi_equipas();
+}
+
+void a(){
+    Jogo novo;
+    Equipa eq1, eq2;
+    char nome[MAX_STR], nome_eq1[MAX_STR], nome_eq2[MAX_STR];
+    int size_nome, score1, score2;
+
+    size_nome = get_string(nome);
+    get_string(nome_eq1);
+    get_string(nome_eq2);
+
+    scanf("%d:%d",&score1,&score2);
+
+    if(procura_jogo(nome) != NULL){
+        printf("%u Jogo existente.\n",NL++);
+        return;
+    }
+
+    else if((eq1 = procura_equipa(nome_eq1)) == NULL || (eq2 = procura_equipa(nome_eq2)) == NULL){
+        printf("%u Equipa inexistente.\n",NL++);
+        return;
+    }
+
+    novo = cria_jogo(nome, size_nome, eq1, eq2, score1, score2);
+
+    insere_jogo(novo);
+    NL++;
+}
+
+void l(){
+    print_todos_jogos(NL);
+    NL++;
+}
+
+void p(){
+    Jogo atual;
+    char nome[MAX_STR];
+
+    get_string(nome);
+
+    atual = procura_jogo(nome);
+
+    if(atual == NULL){
+        printf("%u Jogo inexistente.\n",NL++);
+        return;
+    }
+
+    else
+        printf("%u %s %s %s %d %d\n",NL++,nome_jogo(atual),nome_equipa(atual->equipa1),nome_equipa(atual->equipa2),atual->score1,atual->score2);
+}
+
+void A(){
     char nome[MAX_STR];
     int size;
-    equipa* nova;
+    Equipa nova;
 
     size = get_string(nome);
 
     if(procura_equipa(nome) != NULL){
-        printf("%ud Equipa inexistente.\n",NL);
+        printf("%u Equipa existente.\n",NL++);
         return;
     }
 
    nova = cria_equipa(nome,size); 
-   insere_equipa(nova);        
+   insere_equipa(nova);   
+   NL++;
 } 
 
-void P(unsigned int NL){
-    equipa* atual;
+void P(){
+    Equipa atual;
     char nome[MAX_STR];
 
     get_string(nome);
     atual = procura_equipa(nome);
 
     if(atual == NULL){
-        printf("%ud Equipa inexistente.\n",NL);
+        printf("%u Equipa inexistente.\n",NL++);
         return;
     }
 
     else
-        printf("%s %d",atual->nome,atual->ganhos);
+        printf("%u %s %d\n",NL++,nome_equipa(atual),jogos_ganhos(atual));
 }
+

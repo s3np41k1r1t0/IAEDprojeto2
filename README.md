@@ -6,6 +6,7 @@ TODO:
     melhorar abstracaco,
     alterar hash function,
     utilizar double hash nas quipas
+    usar o previous no no de jogos para ordenar por ordem de insercao
 
 estruturas:
     jogo (char*,equipa*,equipa*,int,int)
