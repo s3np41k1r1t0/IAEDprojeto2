@@ -24,12 +24,13 @@ typedef struct Lista_Jogos{
 
 No_Jogo push_jogo(No_Jogo lista, Jogo jg);
 Jogo procura_lista_jogos(No_Jogo no, char* nome);
-void free_lista_jogos(No_Jogo head);
+No_Jogo procura_no_jogos(char* nome);
+void free_lista_jogos(No_Jogo no);
 void print_todos_jogos(unsigned int NL); 
 
 void inicializa_jogos();
 void destroi_jogos();
 void insere_jogo(Jogo jg);
 Jogo procura_jogo(char* nome);
-
+Jogo remove_no_jogo(No_Jogo rem);
 #endif

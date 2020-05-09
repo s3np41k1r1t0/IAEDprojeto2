@@ -96,3 +96,21 @@ void P(){
         printf("%u %s %d\n",NL++,nome_equipa(atual),jogos_ganhos(atual));
 }
 
+void r(){
+    char nome[MAX_STR];
+    No_Jogo no;
+    Jogo jg;
+
+    get_string(nome);
+
+    if((no = procura_no_jogos(nome)) ==  NULL){
+        printf("%u Jogo inexistente.\n",NL++);
+        return;
+    }
+
+    jg = remove_no_jogo(no);
+    remove_jogo(jg);
+
+    NL++;
+}
+

@@ -50,12 +50,12 @@ int main(){
                 getchar();
                 P(NL);
                 break;
-            /*
+            
             case('r'):
                 getchar();
                 r(NL);
                 break;
-
+            /*
             case('s'):
                 getchar();
                 s(NL);

@@ -48,14 +48,31 @@ Jogo procura_lista_jogos(No_Jogo no, char* nome){
     return NULL;
 }
 
-void free_lista_jogos(No_Jogo head){
+No_Jogo procura_no_jogos(char* nome){
+    int ind;
+    No_Jogo no;
+
+    ind = hash(nome,M_jogos);
+    no = jogos[ind];
+
+    while(no != NULL){
+        if(!strcmp(nome,nome_jogo(no->jg)))
+            return no;
+
+        no = no->proximo;
+    }
+
+    return NULL;
+}
+
+void free_lista_jogos(No_Jogo no){
     No_Jogo temp;
 
-    while(head != NULL){
-        temp = head->proximo;
-        free_jogo(head->jg);
-        free(head);
-        head = temp;
+    while(no != NULL){
+        temp = no->proximo;
+        free_jogo(no->jg);
+        free(no);
+        no = temp;
     }
 }
 
@@ -116,9 +133,39 @@ Jogo procura_jogo(char* nome){
     return procura_lista_jogos(jogos[ind],nome);
 }
 
-/*
- * vou ignorar o remove por equanto
- */
+Jogo remove_no_jogo(No_Jogo rem){
+    int ind;
+    Jogo ret;
+    
+    ind = hash(nome_jogo(rem->jg),M_jogos);
 
+    if(rem == jogos[ind])
+        jogos[ind] = NULL;
 
+    if(rem == lista_jogos->primeiro)
+        lista_jogos->primeiro = rem->inserido_prox;
+
+    if(rem == lista_jogos->ultimo)
+        lista_jogos->ultimo = rem->inserido_ant;
+
+    if(rem->inserido_prox != NULL)
+        rem->inserido_prox->inserido_ant = rem->inserido_ant;
+
+    if(rem->inserido_ant != NULL)
+        rem->inserido_ant->inserido_prox = rem->inserido_prox;
+
+    if(rem->proximo != NULL){
+        rem->proximo->anterior = rem->anterior;
+        jogos[ind] = rem->proximo;
+    }
+
+    if(rem->anterior != NULL)
+        rem->anterior->proximo = rem->proximo;
+
+    ret = rem->jg;
+
+    free(rem);
+    
+    return ret;
+}
 

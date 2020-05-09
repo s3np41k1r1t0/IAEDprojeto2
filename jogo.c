@@ -28,3 +28,12 @@ void free_jogo(Jogo jg){
     }
 }
 
+void remove_jogo(Jogo jg){
+    if(jg->score1 > jg->score2)
+        remove_vitoria(jg->equipa1);
+
+    else if(jg->score2 > jg->score1)
+        remove_vitoria(jg->equipa2);
+
+    free_jogo(jg);
+}

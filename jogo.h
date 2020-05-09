@@ -19,5 +19,6 @@ typedef struct jogo {
 
 Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int score1, int score2);
 void free_jogo(Jogo jg);
+void remove_jogo(Jogo jg);
 
 #endif
