@@ -6,7 +6,7 @@ Equipa cria_equipa(char* nome, int size_nome){
     nova = malloc(sizeof(struct equipa));
     nova->nome = malloc(size_nome*sizeof(char));
     nova->ganhos = 0;
-
+    nova->eh_max = 0;
     strncpy(nova->nome,nome,size_nome);
 
     return nova;

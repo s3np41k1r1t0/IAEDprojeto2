@@ -57,12 +57,12 @@ int main(){
                 getchar();
                 s();
                 break;
-            /*
+            
             case('g'):
                 getchar();
                 g();
                 break;
-            */
+            
         }
     }
 

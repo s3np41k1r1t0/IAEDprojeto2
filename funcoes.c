@@ -60,7 +60,8 @@ void p(){
     }
 
     else
-        printf("%u %s %s %s %d %d\n",NL++,nome_jogo(atual),nome_equipa(atual->equipa1),nome_equipa(atual->equipa2),atual->score1,atual->score2);
+        printf("%u %s %s %s %d %d\n",NL++,nome_jogo(atual),nome_equipa(atual->equipa1),
+            nome_equipa(atual->equipa2),atual->score1,atual->score2);
 }
 
 void A(){
@@ -128,6 +129,11 @@ void s(){
     }
 
     altera_score(jg,score1,score2);
+    
+    NL++;
+}
 
+void g(){
+    print_vencedores(NL);
     NL++;
 }

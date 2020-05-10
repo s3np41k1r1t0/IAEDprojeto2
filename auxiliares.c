@@ -26,6 +26,11 @@ int get_string(char* arg){
 }
 
 int hash(char* s, int m){
-    return ((int)*s + (int)*(s+strlen(s)-1)) % m;
-}
+    int i, len, sum = 0;
+    len = strlen(s);
 
+    for(i=0; i<len; i++) 
+        sum += (int)s[i];
+    
+    return sum % m;
+}

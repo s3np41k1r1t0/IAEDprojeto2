@@ -11,13 +11,8 @@
 typedef struct equipa{
     char* nome;
     int ganhos;
+    int eh_max;
 } *Equipa;
-
-typedef struct mais_ganhos{
-    int max;
-    Equipa eq;
-    Equipa* prox;
-} Top_Ganhos;
 
 Equipa cria_equipa(char* nome, int size_nome);
 void adiciona_vitoria(Equipa eq);

@@ -5,20 +5,32 @@
 #include <string.h>
 #include "equipa.h"
 
-#define M_equipas 31
+#define M_equipas 1029
 
-typedef struct No_Equipa{
+typedef struct no_equipa{
     Equipa eq;
-    struct No_Equipa *next;
-} *no_equipa;
+    struct no_equipa *proximo;
+        
+    struct no_equipa* inserido_prox;
+    struct no_equipa* inserido_ant;
+} *No_Equipa;
 
-no_equipa push_equipa(no_equipa head, Equipa eq);
-void free_lista(no_equipa head);
-Equipa procura_equipa(char* nome);
-Equipa procura_lista(no_equipa no, char* nome);
+typedef struct lista_eq{
+    No_Equipa primeiro;
+    No_Equipa ultimo;
+    int max;
+} *Lista_Eq;
+
+No_Equipa push_equipa(No_Equipa atual, Equipa eq);
+Equipa procura_lista_equipas(No_Equipa no, char* nome);
+void free_lista_equipas(No_Equipa atual);
 
 void inicializa_equipas();
 void destroi_equipas();
 void insere_equipa(Equipa eq);
+Equipa procura_equipa(char* nome);
+void atualiza_maximo(Equipa eq);
+void print_vencedores(unsigned int NL);
+void ordena_por_nome(Equipa* copia, int);
 
 #endif

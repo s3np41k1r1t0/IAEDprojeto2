@@ -1,7 +1,7 @@
 #include "estruturas_jogo.h"
 
 No_Jogo *jogos;
-lista_jg lista_jogos;
+Lista_Jg lista_jogos;
 
 No_Jogo push_jogo(No_Jogo atual, Jogo jg){
     No_Jogo novo;
@@ -11,7 +11,6 @@ No_Jogo push_jogo(No_Jogo atual, Jogo jg){
 
     if(atual != NULL)
         novo->proximo = atual;
-    
 
     else
         novo->proximo = NULL;
@@ -72,27 +71,11 @@ void free_lista_jogos(No_Jogo no){
     }
 }
 
-void print_todos_jogos(unsigned int NL){
-    No_Jogo temp;
-
-    if(lista_jogos->primeiro == NULL)
-        return;
-   
-    temp = lista_jogos->primeiro;
-    
-    while(temp != NULL){
-        /*melhorar abstracao*/
-        printf("%u %s %s %s %d %d\n",NL,nome_jogo(temp->jg),nome_equipa(temp->jg->equipa1),nome_equipa(temp->jg->equipa2),temp->jg->score1,temp->jg->score2);
-        
-        temp = temp->inserido_prox;
-    }
-}
-
 /* HASH TABLE */
 
 void inicializa_jogos(){
     jogos = calloc(M_jogos,sizeof(No_Jogo));
-    lista_jogos = calloc(1,sizeof(struct Lista_Jogos));
+    lista_jogos = calloc(1,sizeof(struct lista_jg));
 }
 
 void destroi_jogos(){
@@ -152,4 +135,18 @@ Jogo remove_no_jogo(No_Jogo rem){
     return ret;
 }
 
+void print_todos_jogos(unsigned int NL){
+    No_Jogo temp;
 
+    if(lista_jogos->primeiro == NULL)
+        return;
+   
+    temp = lista_jogos->primeiro;
+    
+    while(temp != NULL){
+        /*melhorar abstracao*/
+        printf("%u %s %s %s %d %d\n",NL,nome_jogo(temp->jg),nome_equipa(temp->jg->equipa1),nome_equipa(temp->jg->equipa2),temp->jg->score1,temp->jg->score2);
+        
+        temp = temp->inserido_prox;
+    }
+}

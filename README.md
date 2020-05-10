@@ -4,10 +4,8 @@ TODO:
     nao esquecer de usar a estrutura em equipa.h para contar quantos jogos cada equipa ganha,
     nao esquecer de alterar scores ja existentes em s,
     melhorar abstracaco,
-    alterar hash function,
-    utilizar double hash nas quipas
-    usar o previous no no de jogos para ordenar por ordem de insercao
-    is previous really needed tho?
+    how to implement g?
+    can i use a stack
 
 estruturas:
     jogo (char*,equipa*,equipa*,int,int)
