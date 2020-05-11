@@ -3,18 +3,13 @@
 No_Equipa *equipas;
 Lista_Eq lista_equipas;
 
-/* HANDLERS ELEMENTO DA HASH TABLE */
+/* I can avoid having a double linked list if i do linear probing */
 No_Equipa push_equipa(No_Equipa atual, Equipa eq){
     No_Equipa novo;
 
     novo = malloc(sizeof(struct no_equipa));
     novo->eq = eq;
-
-    if(atual != NULL)
-        novo->proximo = atual;
-
-    else
-        novo->proximo = NULL;
+    novo->proximo = atual;
 
     if(lista_equipas->primeiro == NULL){
         lista_equipas->primeiro = novo;
@@ -92,9 +87,15 @@ void atualiza_maximo(Equipa eq){
         lista_equipas->max = jogos_ganhos(eq);
 }
 
+int compara_strings(const void *ptr1, const void *ptr2) { 
+    const char **str1 = (const char **)ptr1;
+    const char **str2 = (const char **)ptr2;
+    return strcmp(*str1, *str2);
+} 
+
 void print_vencedores(unsigned int NL){
     No_Equipa temp;
-    Equipa *vencedores;
+    char **vencedores;
     int i, size = 0;
 
     if(lista_equipas->primeiro == NULL)
@@ -104,44 +105,22 @@ void print_vencedores(unsigned int NL){
     
     printf("%u Melhores %d\n",NL,lista_equipas->max);
 
-    vencedores = malloc(sizeof(Equipa));
+    vencedores = malloc(sizeof(Nome_Equipa));
 
     while(temp != NULL){
         if(jogos_ganhos(temp->eq) == lista_equipas->max){
-            vencedores[size++] = temp->eq;
-            vencedores = realloc(vencedores,(size+1)*sizeof(Equipa));
+            vencedores[size++] = nome_equipa(temp->eq);
+            vencedores = realloc(vencedores,(size+1)*sizeof(Nome_Equipa));
         } 
         
         temp = temp->inserido_prox;
     }
 
-    ordena_por_nome(vencedores,size);
+    qsort(vencedores,size,sizeof(char*),compara_strings);
 
     for(i=0; i<size; i++)
-        printf("%u * %s\n",NL,nome_equipa(vencedores[i]));
+        printf("%u * %s\n",NL,vencedores[i]);
 
     free(vencedores);
-}
-
-void troca(Equipa* a, Equipa* b){
-    Equipa t = *a;
-    *a = *b;
-    *b = t;
-}
-
-void ordena_por_nome(Equipa* eq, int size){
-    int i,j,min;
-
-    for(i=0; i<size; i++){
-        min = i;
-
-        for (j=i+1; j < size; j++){
-            if(strcmp(eq[j]->nome,eq[min]->nome) < 0){
-                min = j;
-            }
-        }
-
-        troca(&eq[i],&eq[min]);
-    }
 }
 

@@ -8,12 +8,7 @@ No_Jogo push_jogo(No_Jogo atual, Jogo jg){
 
     novo = malloc(sizeof(struct no_jogo));
     novo->jg = jg;
-
-    if(atual != NULL)
-        novo->proximo = atual;
-
-    else
-        novo->proximo = NULL;
+    novo->proximo = atual;
 
     if(lista_jogos->primeiro == NULL){
         lista_jogos->primeiro = novo;

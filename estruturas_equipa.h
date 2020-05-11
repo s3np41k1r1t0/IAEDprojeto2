@@ -21,6 +21,10 @@ typedef struct lista_eq{
     int max;
 } *Lista_Eq;
 
+typedef struct nome_equipa{
+    char *nome;
+} Nome_Equipa;
+
 No_Equipa push_equipa(No_Equipa atual, Equipa eq);
 Equipa procura_lista_equipas(No_Equipa no, char* nome);
 void free_lista_equipas(No_Equipa atual);
@@ -31,6 +35,5 @@ void insere_equipa(Equipa eq);
 Equipa procura_equipa(char* nome);
 void atualiza_maximo(Equipa eq);
 void print_vencedores(unsigned int NL);
-void ordena_por_nome(Equipa* copia, int);
 
 #endif

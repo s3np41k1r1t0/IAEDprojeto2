@@ -81,4 +81,3 @@ void altera_score(Jogo jg, int score1, int score2){
     atualiza_maximo(obtem_equipa1(jg));
     atualiza_maximo(obtem_equipa2(jg));
 }
-
