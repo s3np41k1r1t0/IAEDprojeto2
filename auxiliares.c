@@ -34,3 +34,9 @@ int hash(char* s, int m){
     
     return sum % m;
 }
+
+int compara_strings(const void *ptr1, const void *ptr2) { 
+    const char **str1 = (const char **)ptr1;
+    const char **str2 = (const char **)ptr2;
+    return strcmp(*str1, *str2);
+} 

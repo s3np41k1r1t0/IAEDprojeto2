@@ -8,32 +8,37 @@
 #define M_equipas 1029
 
 typedef struct no_equipa{
-    Equipa eq;
-    struct no_equipa *proximo;
-        
-    struct no_equipa* inserido_prox;
-    struct no_equipa* inserido_ant;
+    Equipa equipa;
+    struct no_equipa *prox;
 } *No_Equipa;
 
-typedef struct lista_eq{
+typedef struct lista_equipas{
     No_Equipa primeiro;
     No_Equipa ultimo;
     int max;
-} *Lista_Eq;
+} *Lista_Equipas;
 
-typedef struct nome_equipa{
-    char *nome;
-} Nome_Equipa;
+typedef No_Equipa Equipas_HT[M_equipas];
 
-No_Equipa push_equipa(No_Equipa atual, Equipa eq);
-Equipa procura_lista_equipas(No_Equipa no, char* nome);
-void free_lista_equipas(No_Equipa atual);
+void init_hashtable_equipas(Equipas_HT hashtable);
+Lista_Equipas init_lista_equipas();
 
-void inicializa_equipas();
-void destroi_equipas();
-void insere_equipa(Equipa eq);
-Equipa procura_equipa(char* nome);
-void atualiza_maximo(Equipa eq);
-void print_vencedores(unsigned int NL);
+void insere_equipa(Equipas_HT hashtable, Lista_Equipas lista_equipas, Equipa equipa);
+No_Equipa push_equipa_ht(No_Equipa atual, Equipa equipa);
+void push_equipa_ll(Lista_Equipas lista_Equipas, Equipa equipa);
+
+Equipa procura_equipa(Equipas_HT hashtable, char* nome);
+Equipa procura_ht_equipas(No_Equipa no, char* nome);
+
+Equipa remove_equipa_ht(Equipas_HT hashtable, char* nome);
+Equipa remove_equipa_ll(Lista_Equipas equipas, char* nome);
+
+void print_vencedores(Lista_Equipas Equipas, unsigned int NL);
+
+void destroi_hashtable_equipas(Equipas_HT hashtable);
+void destroi_lista_equipas(Lista_Equipas equipas);
+void destroi_equipas(Lista_Equipas equipas);
+
+void atualiza_maximo(Equipa equipa, Lista_Equipas lista_equipas);
 
 #endif

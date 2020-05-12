@@ -1,147 +1,165 @@
 #include "estruturas_jogo.h"
 
-No_Jogo *jogos;
-Lista_Jg lista_jogos;
+/*No_Jogo *jogos;
+Lista_jogo lista_jogos;*/
 
-No_Jogo push_jogo(No_Jogo atual, Jogo jg){
+/* HASH TABLE */
+
+void init_hashtable_jogos(Jogos_HT hashtable){
+    int i;
+    
+    for(i=0; i<M_jogos; i++)
+        hashtable[i] = NULL;
+}
+
+Lista_Jogos init_lista_jogos(){
+    return calloc(1,sizeof(struct lista_jogos));
+}
+
+void insere_jogo(Jogos_HT hashtable, Lista_Jogos lista_jogos, Jogo jogo){
+    int ind;
+
+    ind = hash(jogo->nome,M_jogos);
+
+    hashtable[ind] = push_jogo_ht(hashtable[ind],jogo);
+
+    push_jogo_ll(lista_jogos, jogo);
+}
+
+No_Jogo push_jogo_ht(No_Jogo atual, Jogo jogo){
     No_Jogo novo;
 
     novo = malloc(sizeof(struct no_jogo));
-    novo->jg = jg;
-    novo->proximo = atual;
-
-    if(lista_jogos->primeiro == NULL){
-        lista_jogos->primeiro = novo;
-        lista_jogos->ultimo = novo;
-        novo->inserido_prox = NULL;
-        novo->inserido_ant = NULL;
-    }
-
-    else{
-        novo->inserido_ant = lista_jogos->ultimo;
-        lista_jogos->ultimo->inserido_prox = novo;        
-        novo->inserido_prox = NULL;
-        lista_jogos->ultimo = novo;
-    }
+    novo->jogo = jogo;
+    novo->prox = atual;
 
     return novo;
 }
 
-Jogo procura_lista_jogos(No_Jogo no, char* nome){
-    while(no != NULL){
-        if(!strcmp(nome,nome_jogo(no->jg)))
-            return no->jg;
+void push_jogo_ll(Lista_Jogos lista_jogos, Jogo jogo){
+    No_Jogo novo;
 
-        no = no->proximo;
-    }
-
-    return NULL;
-}
-
-No_Jogo procura_no_jogos(char* nome){
-    int ind;
-    No_Jogo no;
-
-    ind = hash(nome,M_jogos);
-    no = jogos[ind];
-
-    while(no != NULL){
-        if(!strcmp(nome,nome_jogo(no->jg)))
-            return no;
-
-        no = no->proximo;
-    }
-
-    return NULL;
-}
-
-void free_lista_jogos(No_Jogo no){
-    No_Jogo temp;
-
-    while(no != NULL){
-        temp = no->proximo;
-        free_jogo(no->jg);
-        free(no);
-        no = temp;
-    }
-}
-
-/* HASH TABLE */
-
-void inicializa_jogos(){
-    jogos = calloc(M_jogos,sizeof(No_Jogo));
-    lista_jogos = calloc(1,sizeof(struct lista_jg));
-}
-
-void destroi_jogos(){
-    int i;
-
-    for(i=0; i<M_jogos; i++)
-        free_lista_jogos(jogos[i]);
-
-    free(jogos);
-    free(lista_jogos);
-}
-
-void insere_jogo(Jogo jg){
-    int ind;
-
-    ind = hash(jg->nome,M_jogos);
-
-    jogos[ind] = push_jogo(jogos[ind],jg);
-}
-
-Jogo procura_jogo(char* nome){
-    int ind;
-
-    ind = hash(nome,M_jogos);
-    
-    return procura_lista_jogos(jogos[ind],nome);
-}
-
-Jogo remove_no_jogo(No_Jogo rem){
-    int ind;
-    Jogo ret;
-    
-    ind = hash(nome_jogo(rem->jg),M_jogos);
-
-    if(rem == jogos[ind])
-        jogos[ind] = NULL;
-
-    if(rem == lista_jogos->primeiro)
-        lista_jogos->primeiro = rem->inserido_prox;
-
-    if(rem == lista_jogos->ultimo)
-        lista_jogos->ultimo = rem->inserido_ant;
-
-    if(rem->inserido_prox != NULL)
-        rem->inserido_prox->inserido_ant = rem->inserido_ant;
-
-    if(rem->inserido_ant != NULL)
-        rem->inserido_ant->inserido_prox = rem->inserido_prox;
-
-    if(rem->proximo != NULL)
-        jogos[ind] = rem->proximo;
-    
-    ret = rem->jg;
-
-    free(rem);
-    
-    return ret;
-}
-
-void print_todos_jogos(unsigned int NL){
-    No_Jogo temp;
+    novo = malloc(sizeof(struct no_jogo));
+    novo->jogo = jogo;
+    novo->prox = NULL;
 
     if(lista_jogos->primeiro == NULL)
-        return;
-   
-    temp = lista_jogos->primeiro;
+        lista_jogos->primeiro = novo;
+
+    else
+        lista_jogos->ultimo->prox = novo;
+    
+    lista_jogos->ultimo = novo;
+}
+
+Jogo procura_jogo(Jogos_HT hashtable, char* nome){
+    int ind;
+
+    ind = hash(nome,M_jogos);
+    
+    return procura_ht_jogos(hashtable[ind],nome);
+}
+
+Jogo procura_ht_jogos(No_Jogo no, char* nome){
+    while(no != NULL){
+        if(!strcmp(nome,nome_jogo(no->jogo)))
+            return no->jogo;
+
+        no = no->prox;
+    }
+
+    return NULL;
+}
+
+Jogo remove_jogo_ht(Jogos_HT hashtable, char* nome){
+    int ind;
+    Jogo jogo;
+    No_Jogo no, ant = NULL;
+    
+    ind = hash(nome,M_jogos);
+    no = hashtable[ind];
+
+    while(no != NULL){
+        if(!strcmp(nome,nome_jogo(no->jogo)))
+            break;
+
+        ant = no;
+        no = no->prox;
+    }
+
+    if(no == NULL)
+        return NULL;
+
+    if(ant == NULL)
+        hashtable[ind] = no->prox;
+
+    else
+        ant->prox = no->prox;    
+    
+    jogo = no->jogo;
+    free(no);
+    return jogo;
+}
+
+Jogo remove_jogo_ll(Lista_Jogos jogos, char* nome){
+    Jogo jogo;
+    No_Jogo no, ant = NULL;
+    no = jogos->primeiro;
+
+    while(no != NULL){
+        if(!strcmp(nome,nome_jogo(no->jogo)))
+            break;
+
+        ant = no;
+        no = no->prox;
+    }
+
+    if(no == NULL)
+        return NULL;
+
+    if(ant == NULL)
+        jogos->primeiro = no->prox;
+
+    else{
+        ant->prox = no->prox;    
+        jogos->ultimo = ant;
+    }
+
+    jogo = no->jogo;
+    free(no);
+    return jogo;
+}
+
+void print_todos_jogos(Lista_Jogos jogos, unsigned int NL){
+    No_Jogo temp = jogos->primeiro;
     
     while(temp != NULL){
         /*melhorar abstracao*/
-        printf("%u %s %s %s %d %d\n",NL,nome_jogo(temp->jg),nome_equipa(temp->jg->equipa1),nome_equipa(temp->jg->equipa2),temp->jg->score1,temp->jg->score2);
+        printf("%u %s %s %s %d %d\n",NL,nome_jogo(temp->jogo),nome_equipa(temp->jogo->equipa1),nome_equipa(temp->jogo->equipa2),temp->jogo->score1,temp->jogo->score2);
         
-        temp = temp->inserido_prox;
+        temp = temp->prox;
+    }
+}
+
+void destroi_hashtable_jogos(Jogos_HT hashtable){
+    int i;
+
+    for(i=0; i<M_jogos; i++)
+        free(hashtable[i]);
+}
+
+void destroi_lista_jogos(Lista_Jogos jogos){
+    free(jogos);
+}
+
+void destroi_jogos(Lista_Jogos jogos){
+    No_Jogo no, temp;
+    no = jogos->primeiro;
+
+    while(no != NULL){
+        temp = no->prox;
+        free_jogo(no->jogo);      
+        free(no);
+        no = temp;
     }
 }
