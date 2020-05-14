@@ -1,13 +1,23 @@
 #ifndef ESTRUTURAS_JOGO_H_INCLUDE
 #define ESTRUTURAS_JOGO_H_INCLUDE
 
+/*INCLUDES*/
 #include <stdlib.h>
 #include <string.h>
 #include "jogo.h"
 #include "estruturas_equipa.h"
 
-#define M_jogos 1029
+/*tamanho da hash table*/
+#define M_jogos 569 
 
+/*ESTRUTURAS*/
+
+/*
+  No_Jogo: Jogo, No_Jogo, No_Jogo, No_Jogo
+  Ponteiro para um no que consiste num apontador para um jogo
+  um apontador para o prox elemento inserido na hashtable
+  e apontadores para o prox e para o anterior elemento inserido
+*/
 typedef struct no_jogo{
     Jogo jogo;
     
@@ -17,14 +27,25 @@ typedef struct no_jogo{
     struct no_jogo* ant_inserido;
 } *No_Jogo;
 
+/*
+  Tablela de vetores de nos - hash table
+*/
 typedef No_Jogo Jogos_HT[M_jogos];
 
+/*
+  Jogos: No_Jogo, No_Jogo, Jogos_HT
+  Estrutura que guarda todas as estruturas necessarias para gerir jogos
+  Constituido por um apontador para o primeiro elemento inserido
+  e para o ultimo (double linked list) e uma hashtable
+*/
 typedef struct jogos{
     No_Jogo primeiro;
     No_Jogo ultimo;
     
     Jogos_HT ht;
 } *Jogos;
+
+/*PROTOTIPOS*/
 
 Jogos init_jogos();
 

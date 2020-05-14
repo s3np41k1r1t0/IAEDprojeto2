@@ -6,6 +6,7 @@
 
 /*IMPORTS*/
 #include "funcoes.h"
+#include <stdio.h>
 
 /*FUNCAO MAIN*/
 

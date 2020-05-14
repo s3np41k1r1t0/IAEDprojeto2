@@ -1,7 +1,7 @@
 #include "auxiliares.h"
 
 /*
-  get_string: char* -> int
+  get_string: (char*) -> int
   Le uma string da stdin ate encontrar o carater ':' ou '\n' ou exceder o
   limite de carateres lidos STR_MAX; Retorna o numero de carateres lidos
 */
@@ -25,18 +25,31 @@ int get_string(char* arg){
     return i;
 }
 
+/*
+  hash: (char*,int) -> int
+  Faz hash de uma string que consiste num inteiro entre 0 e m
+*/
 int hash(char* s, int m){
     int i, len, sum = 0;
     len = strlen(s);
 
+    /*calcula a soma de todos os codigos ascii de todas
+      as letras da string s*/
     for(i=0; i<len; i++) 
         sum += (int)s[i];
     
     return sum % m;
 }
 
+/*
+  compara_strings: (const void *, count void *) -> int
+  Funcao para ser usada com o qsort para ordenar char**
+*/
 int compara_strings(const void *ptr1, const void *ptr2) { 
+    /*converte const void* para strings*/
     const char **str1 = (const char **)ptr1;
     const char **str2 = (const char **)ptr2;
+
+    /*compara as strings*/
     return strcmp(*str1, *str2);
 } 

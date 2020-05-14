@@ -1,6 +1,7 @@
 #ifndef FUNCOES_H_INCLUDED
 #define FUNCOES_H_INCLUDED
 
+/*INCLUDES*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "equipa.h"
@@ -9,6 +10,7 @@
 #include "estruturas_jogo.h"
 #include "auxiliares.h"
 
+/*PROTOTIPOS DE FUNCOES*/
 unsigned int a(unsigned int NL, Jogos jogos, Equipas equipas);
 unsigned int A(unsigned int NL, Equipas equipas);
 unsigned int l(unsigned int NL, Jogos jogos);
