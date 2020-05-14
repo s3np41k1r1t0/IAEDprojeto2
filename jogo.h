@@ -20,9 +20,9 @@ typedef struct jogo {
     int score2;
 } *Jogo;
 
-Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int score1, int score2, Lista_Equipas ll_equipas);
+Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int score1, int score2);
 void free_jogo(Jogo jg);
-void remove_jogo(Jogo jg, Lista_Equipas ll_equipas);
-void altera_score(Jogo jg, int score1, int score2, Lista_Equipas ll_equipas);
+void remove_jogo(Jogo jg);
+void altera_score(Jogo jg, int score1, int score2);
 
 #endif

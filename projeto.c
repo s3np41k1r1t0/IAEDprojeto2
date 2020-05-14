@@ -19,16 +19,12 @@ int main(){
     unsigned int NL = 1;
 
     /*Variaveis que conteem as estruturas usadas para guardar os jogos e as equipas*/
-    Jogos_HT ht_jogos;
-    Lista_Jogos ll_jogos;
-    Equipas_HT ht_equipas;
-    Lista_Equipas ll_equipas;
+    Jogos jogos;
+    Equipas equipas;
 
     /*Inicializa estruturas de jogos e equipas*/
-    init_hashtable_jogos(ht_jogos);
-    ll_jogos = init_lista_jogos();
-    init_hashtable_equipas(ht_equipas);
-    ll_equipas = init_lista_equipas();
+    jogos = init_jogos();
+    equipas = init_equipas();
 
     /*Le carateres da stdin ate encontrar o caso terminal
       ou um comando a executar*/
@@ -37,48 +33,42 @@ int main(){
             case('a'):
                 /*elimina o ' ' entre o comando e o conteudo do comando*/
                 getchar(); 
-                NL = a(NL, ht_jogos, ll_jogos, ht_equipas, ll_equipas);
+                NL = a(NL, jogos, equipas);
                 break;
             case('A'):
                 getchar();
-                NL = A(NL, ht_equipas, ll_equipas);
+                NL = A(NL, equipas);
                 break;
             case('l'):
                 getchar();
-                NL = l(NL, ll_jogos);
+                NL = l(NL, jogos);
                 break;
             case('p'):
                 getchar();
-                NL = p(NL, ht_jogos);
+                NL = p(NL, jogos);
                 break;
             case('P'):
                 getchar();
-                NL = P(NL, ht_equipas);
+                NL = P(NL, equipas);
                 break;
             case('r'):
                 getchar();
-                NL = r(NL, ht_jogos, ll_jogos, ll_equipas);
+                NL = r(NL, jogos);
                 break;
             case('s'):
                 getchar();
-                NL = s(NL, ht_jogos, ll_equipas);
+                NL = s(NL, jogos);
                 break;
             case('g'):
                 getchar();
-                NL = g(NL, ll_equipas);
+                NL = g(NL, equipas);
                 break;   
         }
     }
 
-    /*destroi todos os jogos e equipas*/
-    destroi_jogos(ll_jogos);
-    destroi_equipas(ll_equipas);
-
-    /*destroi todas as estruturas de jogos e equipas*/
-    destroi_hashtable_jogos(ht_jogos);
-    destroi_lista_jogos(ll_jogos);
-    destroi_hashtable_equipas(ht_equipas);
-    destroi_lista_equipas(ll_equipas);
+    /*destroi todos os jogos e equipas e as estruturas*/
+    destroi_jogos(jogos);
+    destroi_equipas(equipas);
 
     return 0;
 }

@@ -1,27 +1,27 @@
 #include "estruturas_equipa.h"
 
-void init_hashtable_equipas(Equipas_HT hashtable){
-    int i;
-    
-    for(i=0; i<M_equipas; i++)
-        hashtable[i] = NULL;
+Equipas init_equipas(){
+    return calloc(1,sizeof(struct equipas));
 }
 
-Lista_Equipas init_lista_equipas(){
-    return calloc(1,sizeof(struct lista_equipas));
-}
-
-void insere_equipa(Equipas_HT hashtable, Lista_Equipas lista_equipas, Equipa equipa){
+void insere_equipa(Equipas equipas, Equipa equipa){
     int ind;
 
     ind = hash(equipa->nome,M_equipas);
 
-    hashtable[ind] = push_equipa_ht(hashtable[ind],equipa);
+    equipas->ht[ind] = push_equipa(equipas->ht[ind],equipa);
 
-    push_equipa_ll(lista_equipas, equipa);
+    if(equipas->primeiro == NULL)
+        equipas->primeiro = equipas->ht[ind];
+
+    else
+        equipas->ultimo->prox_inserido = equipas->ht[ind];
+
+    equipas->ht[ind]->prox_inserido = NULL;
+    equipas->ultimo = equipas->ht[ind];
 }
 
-No_Equipa push_equipa_ht(No_Equipa atual, Equipa equipa){
+No_Equipa push_equipa(No_Equipa atual, Equipa equipa){
     No_Equipa novo;
 
     novo = malloc(sizeof(struct no_equipa));
@@ -31,28 +31,12 @@ No_Equipa push_equipa_ht(No_Equipa atual, Equipa equipa){
     return novo;
 }
 
-void push_equipa_ll(Lista_Equipas lista_equipas, Equipa equipa){
-    No_Equipa novo;
-
-    novo = malloc(sizeof(struct no_equipa));
-    novo->equipa = equipa;
-    novo->prox = NULL;
-
-    if(lista_equipas->primeiro == NULL)
-        lista_equipas->primeiro = novo;
-
-    else
-        lista_equipas->ultimo->prox = novo;
-    
-    lista_equipas->ultimo = novo;
-}
-
-Equipa procura_equipa(Equipas_HT hashtable, char* nome){
+Equipa procura_equipa(Equipas equipas, char* nome){
     int ind;
 
     ind = hash(nome,M_equipas);
     
-    return procura_ht_equipas(hashtable[ind],nome);
+    return procura_ht_equipas(equipas->ht[ind],nome);
 }
 
 Equipa procura_ht_equipas(No_Equipa no, char* nome){
@@ -66,120 +50,57 @@ Equipa procura_ht_equipas(No_Equipa no, char* nome){
     return NULL;
 }
 
-Equipa remove_equipa_ht(Equipas_HT hashtable, char* nome){
-    int ind;
-    Equipa equipa;
-    No_Equipa no, ant = NULL;
-    
-    ind = hash(nome,M_equipas);
-    no = hashtable[ind];
+void destroi_equipas(Equipas equipas){
+    No_Equipa temp;
 
-    while(no != NULL){
-        if(!strcmp(nome,nome_equipa(no->equipa)))
-            break;
-
-        ant = no;
-        no = no->prox;
+    while(equipas->primeiro != NULL){
+        temp = equipas->primeiro->prox_inserido;
+        free_equipa(equipas->primeiro->equipa);      
+        free(equipas->primeiro);
+        equipas->primeiro = temp;
     }
 
-    if(no == NULL)
-        return NULL;
-
-    if(ant == NULL)
-        hashtable[ind] = no->prox;
-
-    else
-        ant->prox = no->prox;    
-
-    equipa = no->equipa;
-    free(no);
-    return equipa;
-}
-
-Equipa remove_equipa_ll(Lista_Equipas equipas, char* nome){
-    Equipa equipa;
-    No_Equipa no, ant = NULL;
-    no = equipas->primeiro;
-
-    while(no != NULL){
-        if(!strcmp(nome,nome_equipa(no->equipa)))
-            break;
-
-        ant = no;
-        no = no->prox;
-    }
-
-    if(no == NULL)
-        return NULL;
-
-    if(ant == NULL)
-        equipas->primeiro = no->prox;
-
-    else{
-        ant->prox = no->prox;    
-        equipas->ultimo = ant;
-    }
-
-    equipa = no->equipa;
-    free(no);
-    return equipa;
-}
-
-void destroi_hashtable_equipas(Equipas_HT hashtable){
-    int i;
-
-    for(i=0; i<M_equipas; i++)
-        free(hashtable[i]);
-}
-
-void destroi_lista_equipas(Lista_Equipas equipas){
     free(equipas);
 }
-
-void destroi_equipas(Lista_Equipas equipas){
-    No_Equipa no, temp;
-    no = equipas->primeiro;
-
-    while(no != NULL){
-        temp = no->prox;
-        free_equipa(no->equipa);  
-        free(no);      
-        no = temp;
-    }
-}
-
-void print_vencedores(Lista_Equipas lista_equipas, unsigned int NL){
+void print_vencedores(Equipas equipas, unsigned int NL){
     No_Equipa temp;
     char **vencedores;
-    int i, size = 0;
+    int i, max, size_max, size = 0;
 
-    if(lista_equipas->primeiro == NULL)
+    if(equipas->primeiro == NULL)
         return;
    
-    temp = lista_equipas->primeiro;
-    
-    printf("%u Melhores %d\n",NL,lista_equipas->max);
+    temp = equipas->primeiro;
+
 
     vencedores = malloc(sizeof(char *));
 
+    max = 0;
+    size_max = 0;
     while(temp != NULL){
-        if(jogos_ganhos(temp->equipa) == lista_equipas->max){
+        if(jogos_ganhos(temp->equipa) > max){
+            max = jogos_ganhos(temp->equipa);
+            size = 0;
             vencedores[size++] = nome_equipa(temp->equipa);
-            vencedores = realloc(vencedores,(size+1)*sizeof(char *));
+        }
+                
+        else if(jogos_ganhos(temp->equipa) == max){
+            vencedores[size++] = nome_equipa(temp->equipa);
         } 
         
-        temp = temp->prox;
+        if(size > size_max){
+            vencedores = realloc(vencedores,(size+1)*sizeof(char *));
+            size_max++;
+        }
+
+        temp = temp->prox_inserido;
     }
 
+    printf("%u Melhores %d\n",NL,max);
     qsort(vencedores,size,sizeof(char*),compara_strings);
 
     for(i=0; i<size; i++)
         printf("%u * %s\n",NL,vencedores[i]);
 
     free(vencedores);
-}
-
-void atualiza_maximo(Equipa eq, Lista_Equipas lista_equipas){
-    if(jogos_ganhos(eq) > lista_equipas->max)
-        lista_equipas->max = jogos_ganhos(eq);
 }

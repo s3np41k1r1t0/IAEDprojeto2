@@ -10,36 +10,34 @@
 
 typedef struct no_jogo{
     Jogo jogo;
+    
     struct no_jogo* prox;
-} *No_Jogo;
 
-typedef struct lista_jogos{
-    No_Jogo primeiro;
-    No_Jogo ultimo;
-} *Lista_Jogos;
+    struct no_jogo* prox_inserido;
+    struct no_jogo* ant_inserido;
+} *No_Jogo;
 
 typedef No_Jogo Jogos_HT[M_jogos];
 
-void init_hashtable_jogos(Jogos_HT hashtable);
-Lista_Jogos init_lista_jogos();
+typedef struct jogos{
+    No_Jogo primeiro;
+    No_Jogo ultimo;
+    
+    Jogos_HT ht;
+} *Jogos;
 
-void insere_jogo(Jogos_HT hashtable, Lista_Jogos lista_jogos, Jogo jogo);
-No_Jogo push_jogo_ht(No_Jogo atual, Jogo jogo);
-void push_jogo_ll(Lista_Jogos lista_jogos, Jogo jogo);
+Jogos init_jogos();
 
-Jogo procura_jogo(Jogos_HT hashtable, char* nome);
+void insere_jogo(Jogos jogos, Jogo jogo);
+No_Jogo push_jogo(No_Jogo atual, Jogo jogo);
+
+Jogo procura_jogo(Jogos jogos, char* nome);
 Jogo procura_ht_jogos(No_Jogo no, char* nome);
 
-Jogo remove_jogo_ht(Jogos_HT hashtable, char* nome);
-Jogo remove_jogo_ll(Lista_Jogos jogos, char* nome);
+Jogo remove_jogos(Jogos jogos, char* nome);
 
-void print_todos_jogos(Lista_Jogos jogos, unsigned int NL);
+void print_todos_jogos(Jogos jogos, unsigned int NL);
 
-void destroi_hashtable_jogos(Jogos_HT hashtable);
-void destroi_lista_jogos(Lista_Jogos jogos);
-void destroi_jogos(Lista_Jogos jogos);
-
-void inicializa_jogos();
-
+void destroi_jogos(Jogos jogos);
 
 #endif

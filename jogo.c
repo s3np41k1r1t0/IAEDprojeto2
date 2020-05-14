@@ -1,6 +1,6 @@
 #include "jogo.h"
 
-Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int score1, int score2, Lista_Equipas ll_equipas){
+Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int score1, int score2){
     Jogo novo;
 
     novo = malloc(sizeof(struct jogo));
@@ -12,15 +12,11 @@ Jogo cria_jogo(char* nome, int size_nome, Equipa equipa1, Equipa equipa2, int sc
 
     strncpy(novo->nome,nome,size_nome);
 
-    if(score1 > score2){
+    if(score1 > score2)
         adiciona_vitoria(equipa1);
-        atualiza_maximo(equipa1, ll_equipas);
-    }
 
-    else if(score1 < score2){
+    else if(score1 < score2)
         adiciona_vitoria(equipa2);
-        atualiza_maximo(equipa2, ll_equipas);
-    }
 
     return novo;
 }
@@ -32,21 +28,17 @@ void free_jogo(Jogo jg){
     }
 }
 
-void remove_jogo(Jogo jg, Lista_Equipas ll_equipas){
-    if(jg->score1 > jg->score2){
+void remove_jogo(Jogo jg){
+    if(jg->score1 > jg->score2)
         remove_vitoria(obtem_equipa1(jg));
-        atualiza_maximo(obtem_equipa1(jg), ll_equipas);
-    }
 
-    else if(jg->score2 > jg->score1){
+    else if(jg->score2 > jg->score1)
         remove_vitoria(obtem_equipa2(jg));
-        atualiza_maximo(obtem_equipa2(jg), ll_equipas);
-    }
 
     free_jogo(jg);
 }
 
-void altera_score(Jogo jg, int score1, int score2, Lista_Equipas ll_equipas){
+void altera_score(Jogo jg, int score1, int score2){
     if(jg->score1 == jg->score2){
         if(score1 > score2)
             adiciona_vitoria(jg->equipa1);
@@ -77,7 +69,4 @@ void altera_score(Jogo jg, int score1, int score2, Lista_Equipas ll_equipas){
 
     jg->score1 = score1;
     jg->score2 = score2;
-
-    atualiza_maximo(obtem_equipa1(jg), ll_equipas);
-    atualiza_maximo(obtem_equipa2(jg), ll_equipas);
 }
