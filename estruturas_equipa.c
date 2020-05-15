@@ -112,7 +112,7 @@ void print_vencedores(Equipas equipas, unsigned int NL){
         return;
    
     no = equipas->primeiro;
-    vencedores = malloc(sizeof(char *));
+    vencedores = malloc(size_max*sizeof(char *));
 
     /*percorre a linked list*/
     while(no != NULL){

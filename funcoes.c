@@ -62,8 +62,8 @@ unsigned int p(unsigned int NL, Jogos jogos){
         printf("%u Jogo inexistente.\n",NL);
 
     else
-        printf("%u %s %s %s %d %d\n",NL,nome_jogo(atual),nome_equipa(atual->equipa1),
-            nome_equipa(atual->equipa2),atual->score1,atual->score2);
+        printf("%u %s %s %s %d %d\n",NL,nome_jogo(atual),nome_equipa(obtem_equipa1(atual)),
+            nome_equipa(obtem_equipa2(atual)),obtem_score1(atual),obtem_score2(atual));
 
     return ++NL;
 }
