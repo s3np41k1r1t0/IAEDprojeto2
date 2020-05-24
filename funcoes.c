@@ -1,3 +1,10 @@
+/*
+  Ficheiro: funcoes.c
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que contem as funcoes principais
+*/
+
+/*INCLUDES*/
 #include "funcoes.h"
 
 /*
@@ -111,7 +118,7 @@ unsigned int P(unsigned int NL, Equipas equipas){
     }
 
     else
-        printf("%u %s %d\n",NL,nome_equipa(atual),jogos_ganhos(atual));
+        printf("%u %s %d\n",NL,nome_equipa(atual),vitorias_equipa(atual));
 
     return ++NL;
 }

@@ -1,3 +1,9 @@
+/*
+  Ficheiro: auxiliares.c
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que contem funcoes auxiliares
+*/
+
 #include "auxiliares.h"
 
 /*
@@ -30,13 +36,19 @@ int get_string(char* arg){
   Faz hash de uma string que consiste num inteiro entre 0 e m
 */
 int hash(char* s, int m){
-    int i, len, sum = 0;
-    len = strlen(s);
+    int i = 0;
+    unsigned int sum = 0;
 
-    /*calcula a soma de todos os codigos ascii de todas
-      as letras da string s*/
-    for(i=0; i<len; i++) 
-        sum += (int)s[i];
+    /*Implementacao da funcao de hash de Jenkins*/
+    while(s[i] != '\0'){
+      sum += s[i++];
+      sum += sum << 10;
+      sum ^= sum >> 6;
+    }
+
+    sum += sum << 3;
+    sum ^= sum >> 11;
+    sum += sum << 15;
     
     return sum % m;
 }

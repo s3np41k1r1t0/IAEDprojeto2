@@ -1,3 +1,9 @@
+/*
+  Ficheiro: auxiliares.h
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que define as funcoes auxiliares
+*/
+
 #ifndef AUXILIARES_H_INCLUDE
 #define AUXILIARES_H_INCLUDE
 

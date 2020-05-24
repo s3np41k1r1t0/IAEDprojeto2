@@ -1,3 +1,9 @@
+/*
+  Ficheiro: equipa.h
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que define as estruturas que representam as equipas
+*/
+
 #ifndef EQUIPA_H_DEFINE
 #define EQUIPA_H_DEFINE
 
@@ -8,7 +14,7 @@
 
 /*MACROS*/
 #define nome_equipa(a) (a->nome)
-#define jogos_ganhos(a) (a->ganhos)
+#define vitorias_equipa(a) (a->vitorias)
 
 /*
   Equipa: char*, int
@@ -17,7 +23,7 @@
 */
 typedef struct equipa{
     char* nome;
-    int ganhos;
+    int vitorias;
 } *Equipa;
 
 /*PROTOTIPOS*/

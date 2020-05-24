@@ -1,3 +1,9 @@
+/*
+  Ficheiro: equipa.c
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que define as funcoes que lidam com as equipas
+*/
+
 #include "equipa.h"
 
 /*
@@ -8,10 +14,10 @@ Equipa cria_equipa(char* nome, int size_nome){
     Equipa nova;
         
     nova = malloc(sizeof(struct equipa));
-    nova->nome = malloc(size_nome*sizeof(char));
-    nova->ganhos = 0;
+    nome_equipa(nova) = malloc(size_nome*sizeof(char));
+    vitorias_equipa(nova) = 0;
     
-    strncpy(nova->nome,nome,size_nome);
+    strncpy(nome_equipa(nova),nome,size_nome);
 
     return nova;
 }
@@ -21,7 +27,7 @@ Equipa cria_equipa(char* nome, int size_nome){
   Adiciona uma vitoria a equipa
 */
 void adiciona_vitoria(Equipa eq){
-    eq->ganhos += 1;
+    vitorias_equipa(eq) += 1;
 }
 
 /*
@@ -30,8 +36,8 @@ void adiciona_vitoria(Equipa eq){
   seja maior que 0
 */
 void remove_vitoria(Equipa eq){
-    if(eq->ganhos>0)
-        eq->ganhos -= 1;
+    if(vitorias_equipa(eq) > 0)
+        vitorias_equipa(eq) -= 1;
 }
 
 /*

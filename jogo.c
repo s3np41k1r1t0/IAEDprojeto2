@@ -1,3 +1,10 @@
+/*
+  Ficheiro: jogo.c
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que contem as funcoes que lidam com os jogos
+*/
+
+/*INCLUDES*/
 #include "jogo.h"
 
 /*

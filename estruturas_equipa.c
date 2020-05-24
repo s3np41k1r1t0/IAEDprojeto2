@@ -1,3 +1,11 @@
+/*
+  Ficheiro: estruturas_equipa.c
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro em que se definem as funcoes que lidam com
+             as estruturas das equipas
+*/
+
+/*INCLUDES*/
 #include "estruturas_equipa.h"
 
 /*
@@ -16,7 +24,7 @@ void insere_equipa(Equipas equipas, Equipa equipa){
     int ind;
 
     /*obtem a hash do nome da equipa*/
-    ind = hash(equipa->nome,M_equipas);
+    ind = hash(nome_equipa(equipa),M_equipas);
 
     /*insere o elemento na entrada hash da hashtable*/
     equipas->ht[ind] = push_equipa(equipas->ht[ind],equipa);
@@ -117,13 +125,13 @@ void print_vencedores(Equipas equipas, unsigned int NL){
     /*percorre a linked list*/
     while(no != NULL){
         /*caso um novo maximo seja encontrado reescreve o vetor*/
-        if(jogos_ganhos(no->equipa) > max){
-            max = jogos_ganhos(no->equipa);
+        if(vitorias_equipa(no->equipa) > max){
+            max = vitorias_equipa(no->equipa);
             size = 0;
             vencedores[size++] = nome_equipa(no->equipa);
         }
                 
-        else if(jogos_ganhos(no->equipa) == max){
+        else if(vitorias_equipa(no->equipa) == max){
             vencedores[size++] = nome_equipa(no->equipa);
         } 
         

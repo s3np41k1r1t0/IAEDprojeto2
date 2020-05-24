@@ -1,13 +1,21 @@
+/*
+  Ficheiro: estruturas_equipa.h
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro em que se definem as estruturas das equipas
+*/
+
 #ifndef ESTRUTURAS_EQUIPA_H_INCLUDE
 #define ESTRUTURAS_EQUIPA_H_INCLUDE
 
 /*INCLUDES*/
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include "auxiliares.h"
 #include "equipa.h"
 
 /*tamanho da hash table*/
-#define M_equipas 569
+#define M_equipas 5059
 
 /*ESTRUTURAS*/
 

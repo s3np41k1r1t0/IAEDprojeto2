@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-ansi -Wall -Wextra -pedantic -fsanitize=address
+CFLAGS=-ansi -Wall -Wextra -pedantic
 
-test: test.c auxiliares.c
-	$(CC) -o test test.c auxiliares.c
+test: *.c
+	$(CC) $(CFLAGS) -o projeto *.c 

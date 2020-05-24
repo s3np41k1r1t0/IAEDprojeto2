@@ -1,3 +1,9 @@
+/*
+  Ficheiro: jogo.h
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que define as estruturas que representam os jogos
+*/
+
 #ifndef JOGO_H_INCLUDE
 #define JOGO_H_INCLUDE
 

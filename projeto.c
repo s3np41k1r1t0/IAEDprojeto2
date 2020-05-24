@@ -1,5 +1,5 @@
 /*
-  Ficheiro: projeto.h
+  Ficheiro: projeto.c
   Autor: Bruno Miguel da Silva Mendes ist195544/al95544
   Descricao: Ponto de entrada para o projeto de IAED19/20
 */

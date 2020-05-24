@@ -1,14 +1,21 @@
+/*
+  Ficheiro: estruturas_jogo.h
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro em que se definem as estruturas dos jogos
+*/
+
 #ifndef ESTRUTURAS_JOGO_H_INCLUDE
 #define ESTRUTURAS_JOGO_H_INCLUDE
 
 /*INCLUDES*/
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "jogo.h"
-#include "estruturas_equipa.h"
+#include "equipa.h"
 
 /*tamanho da hash table*/
-#define M_jogos 569 
+#define M_jogos 5059
 
 /*ESTRUTURAS*/
 

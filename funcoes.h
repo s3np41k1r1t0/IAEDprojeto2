@@ -1,3 +1,9 @@
+/*
+  Ficheiro: funcoes.h
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro que define as funcoes principais
+*/
+
 #ifndef FUNCOES_H_INCLUDED
 #define FUNCOES_H_INCLUDED
 

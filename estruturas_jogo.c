@@ -1,3 +1,10 @@
+/*
+  Ficheiro: estruturas_jogo.c
+  Autor: Bruno Miguel da Silva Mendes ist195544/al95544
+  Descricao: Ficheiro em que se definem as funcoes que lidam com
+             as estruturas dos jogos
+*/
+
 #include "estruturas_jogo.h"
 
 /*
